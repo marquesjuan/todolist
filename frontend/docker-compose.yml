@@ -1,0 +1,16 @@
+services:
+ node:
+  build:
+   context: .
+  container_name: "angular"
+  volumes:
+  - ./todolist:/home/node/app
+  ports:
+  - "4200:4200"
+  command: ["ng","serve","--host","0.0.0.0"]
+  networks:
+  - rede_todolist
+
+networks:
+ rede_todolist:
+  external: true   

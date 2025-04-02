@@ -1,0 +1,44 @@
+services:
+ fastapi:
+  build:
+   context: .
+  container_name: fastapi
+  volumes:
+   - .:/usr/src/app
+  ports:
+   - "8000:8000"
+  networks:
+    - rede_todolist
+    - rede_todolist_db
+  command: ["uvicorn","main:app","--host","0.0.0.0","--reload"]
+  depends_on:
+   - postgres
+  
+ postgres:
+  image: postgres
+  restart: always
+  container_name: postgres
+  environment:
+   POSTGRES_PASSWORD: 1234
+   POSTGRES_USER: root
+  volumes:
+   - pgdata:/var/lib/postgresql/data
+  networks:
+   - rede_todolist_db
+
+ #adminer:
+  #image: adminer
+  #restart: always
+  #ports:
+   #- "8080:8080"
+  #networks:
+   #- rede_todolist_db
+
+volumes:
+ pgdata:
+
+networks:
+ rede_todolist:
+  external: true
+ rede_todolist_db:
+  driver: bridge

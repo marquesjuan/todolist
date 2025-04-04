@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 import pymysql
 
 #analisar segurança....
-engine = create_engine("mysql+pymysql://root:5912@172.22.0.2:3306/todolist")
+engine = create_engine("mysql+pymysql://root:5912@mysqlteste:3306/todolist")
 
 if(engine):
     print(engine)
